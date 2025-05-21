@@ -19,6 +19,7 @@ macro(setup_common_libraries)
     ${ATen_XPU_GEN_SRCS})
   install(TARGETS torch_xpu_ops_aten DESTINATION "${TORCH_INSTALL_LIB_DIR}")
   target_compile_definitions(torch_xpu_ops_aten PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(torch_xpu_ops_aten PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   target_link_libraries(torch_xpu_ops_aten PUBLIC torch_xpu)
   target_link_libraries(torch_xpu_ops_aten PUBLIC torch_cpu)
   target_link_libraries(torch_xpu_ops_aten PUBLIC c10)
@@ -106,6 +107,7 @@ elseif(BUILD_SPLIT_KERNEL_LIB OR __INTEL_LLVM_COMPILER LESS 20250004 OR ICX_DATE
     SHARED
     SYCL_SOURCES ${ATen_XPU_SYCL_BINARY_SRCS})
   target_compile_definitions(${sycl_binary_lib} PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(${sycl_binary_lib} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   target_link_libraries(torch_xpu_ops_aten PUBLIC ${sycl_binary_lib})
   target_link_libraries(${sycl_binary_lib} PUBLIC torch_xpu)
   list(APPEND TORCH_XPU_OPS_LIBRARIES ${sycl_binary_lib})
@@ -120,6 +122,7 @@ elseif(BUILD_SPLIT_KERNEL_LIB OR __INTEL_LLVM_COMPILER LESS 20250004 OR ICX_DATE
     SHARED
     SYCL_SOURCES ${ATen_XPU_SYCL_UNARY_SRCS})
   target_compile_definitions(${sycl_unary_lib} PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(${sycl_unary_lib} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   target_link_libraries(torch_xpu_ops_aten PUBLIC ${sycl_unary_lib})
   target_link_libraries(${sycl_unary_lib} PUBLIC torch_xpu)
   list(APPEND TORCH_XPU_OPS_LIBRARIES ${sycl_unary_lib})
@@ -134,6 +137,7 @@ elseif(BUILD_SPLIT_KERNEL_LIB OR __INTEL_LLVM_COMPILER LESS 20250004 OR ICX_DATE
     SHARED
     SYCL_SOURCES ${ATen_XPU_SYCL_REDUCE_SRCS})
   target_compile_definitions(${sycl_reduce_lib} PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(${sycl_reduce_lib} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   target_link_libraries(torch_xpu_ops_aten PUBLIC ${sycl_reduce_lib})
   target_link_libraries(${sycl_reduce_lib} PUBLIC torch_xpu)
   list(APPEND TORCH_XPU_OPS_LIBRARIES ${sycl_reduce_lib})
@@ -148,6 +152,7 @@ elseif(BUILD_SPLIT_KERNEL_LIB OR __INTEL_LLVM_COMPILER LESS 20250004 OR ICX_DATE
     SHARED
     SYCL_SOURCES ${ATen_XPU_SYCL_ACTIVATION_SRCS})
   target_compile_definitions(${sycl_activation_lib} PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(${sycl_activation_lib} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   target_link_libraries(torch_xpu_ops_aten PUBLIC ${sycl_activation_lib})
   target_link_libraries(${sycl_activation_lib} PUBLIC torch_xpu)
   list(APPEND TORCH_XPU_OPS_LIBRARIES ${sycl_activation_lib})
@@ -162,6 +167,7 @@ elseif(BUILD_SPLIT_KERNEL_LIB OR __INTEL_LLVM_COMPILER LESS 20250004 OR ICX_DATE
     SHARED
     SYCL_SOURCES ${ATen_XPU_SYCL_FOREACH_SRCS})
   target_compile_definitions(${sycl_foreach_lib} PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(${sycl_foreach_lib} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   target_link_libraries(torch_xpu_ops_aten PUBLIC ${sycl_foreach_lib})
   target_link_libraries(${sycl_foreach_lib} PUBLIC torch_xpu)
   list(APPEND TORCH_XPU_OPS_LIBRARIES ${sycl_foreach_lib})
@@ -176,6 +182,7 @@ elseif(BUILD_SPLIT_KERNEL_LIB OR __INTEL_LLVM_COMPILER LESS 20250004 OR ICX_DATE
     SHARED
     SYCL_SOURCES ${ATen_XPU_SYCL_TENSOR_SRCS})
   target_compile_definitions(${sycl_tensor_lib} PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(${sycl_tensor_lib} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   target_link_libraries(torch_xpu_ops_aten PUBLIC ${sycl_tensor_lib})
   target_link_libraries(${sycl_tensor_lib} PUBLIC torch_xpu)
   list(APPEND TORCH_XPU_OPS_LIBRARIES ${sycl_tensor_lib})
@@ -190,6 +197,7 @@ elseif(BUILD_SPLIT_KERNEL_LIB OR __INTEL_LLVM_COMPILER LESS 20250004 OR ICX_DATE
     SHARED
     SYCL_SOURCES ${ATen_XPU_SYCL_NORM_LOSS_SRCS})
   target_compile_definitions(${sycl_norm_loss_lib} PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(${sycl_norm_loss_lib} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   target_link_libraries(torch_xpu_ops_aten PUBLIC ${sycl_norm_loss_lib})
   target_link_libraries(${sycl_norm_loss_lib} PUBLIC torch_xpu)
   list(APPEND TORCH_XPU_OPS_LIBRARIES ${sycl_norm_loss_lib})
@@ -204,6 +212,7 @@ elseif(BUILD_SPLIT_KERNEL_LIB OR __INTEL_LLVM_COMPILER LESS 20250004 OR ICX_DATE
     SHARED
     SYCL_SOURCES ${ATen_XPU_SYCL_POLY_SRCS})
   target_compile_definitions(${sycl_poly_lib} PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(${sycl_poly_lib} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   target_link_libraries(torch_xpu_ops_aten PUBLIC ${sycl_poly_lib})
   target_link_libraries(${sycl_poly_lib} PUBLIC torch_xpu)
   list(APPEND TORCH_XPU_OPS_LIBRARIES ${sycl_poly_lib})
@@ -218,6 +227,7 @@ elseif(BUILD_SPLIT_KERNEL_LIB OR __INTEL_LLVM_COMPILER LESS 20250004 OR ICX_DATE
     SHARED
     SYCL_SOURCES ${ATen_XPU_SYCL_DISTRIBUTION_SRCS})
   target_compile_definitions(${sycl_dist_lib} PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(${sycl_dist_lib} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   target_link_libraries(torch_xpu_ops_aten PUBLIC ${sycl_dist_lib})
   target_link_libraries(${sycl_dist_lib} PUBLIC torch_xpu)
   list(APPEND TORCH_XPU_OPS_LIBRARIES ${sycl_dist_lib})
@@ -232,6 +242,7 @@ elseif(BUILD_SPLIT_KERNEL_LIB OR __INTEL_LLVM_COMPILER LESS 20250004 OR ICX_DATE
     SHARED
     SYCL_SOURCES ${ATen_XPU_SYCL_OTHERS_SRCS})
   target_compile_definitions(${sycl_lib} PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(${sycl_lib} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   target_link_libraries(torch_xpu_ops_aten PUBLIC ${sycl_lib})
   target_link_libraries(${sycl_lib} PUBLIC torch_xpu)
   list(APPEND TORCH_XPU_OPS_LIBRARIES ${sycl_lib})
@@ -304,6 +315,7 @@ else()
     STATIC
     SYCL_SOURCES ${ATen_XPU_SYCL_COMMON_SRCS})
   target_compile_definitions(${sycl_common_lib} PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(${sycl_common_lib} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   list(APPEND TORCH_XPU_OPS_LIBRARIES ${sycl_common_lib})
 
   # Other kernel lib
@@ -313,6 +325,7 @@ else()
     STATIC
     SYCL_SOURCES ${ATen_XPU_SYCL_OTHERS_SRCS})
   target_compile_definitions(${sycl_lib} PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(${sycl_lib} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
   list(APPEND TORCH_XPU_OPS_LIBRARIES ${sycl_lib})
 
   target_link_libraries(torch_xpu_ops

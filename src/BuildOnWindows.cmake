@@ -255,6 +255,7 @@ else()
     ${ATen_XPU_NATIVE_CPP_SRCS}
     ${ATen_XPU_GEN_SRCS})
   target_compile_definitions(torch_xpu_ops PRIVATE TORCH_XPU_BUILD_MAIN_LIB)
+  target_compile_options(torch_xpu_ops PUBLIC $<$<COMPILE_LANGUAGE:CXX>:/d2implyavx512upperregs->)
  # Split SYCL kernels into 2 libraries as categories 1) Common (Unary+Binary+Reduce+Pow+Copy+Activation+Foreach) 2) Others.
   set(ATen_XPU_SYCL_COMMON_SRCS)
   set(ATen_XPU_SYCL_OTHERS_SRCS)

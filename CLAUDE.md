@@ -340,6 +340,11 @@ Generally, use `spin lint` to run the lint and `spin fixlint` to apply automatic
 When the user asks you to commit or amend, run `lintrunner -a` before creating
 the commit. Fix any lint errors it reports, then commit.
 
+**Note:** `lintrunner` only works on Linux. If you are on Windows, push your
+branch to GitHub and run `lintrunner -a` on a Linux machine, or use a Linux
+dev-container. If `lintrunner` is not available, install it with
+`pip install lintrunner && lintrunner init`.
+
 ## Test Commands
 
 Tests run via **pytest** (not `python -m pytest`). Most tests live in `test/xpu/`.

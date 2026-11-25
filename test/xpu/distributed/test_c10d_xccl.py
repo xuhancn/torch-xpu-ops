@@ -586,6 +586,8 @@ class ProcessGroupXCCLSplitTest(MultiProcessTestCase):
     def _create_process_group_xccl(
         self, timeout=timedelta(seconds=600), device_id=None
     ):
+        if device_id is not None:
+            torch.xpu.set_device(device_id)
         store = c10d.FileStore(self.file_name, self.world_size)
         c10d.init_process_group(
             "xccl",
